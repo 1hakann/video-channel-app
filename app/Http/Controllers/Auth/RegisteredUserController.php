@@ -34,12 +34,18 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'channel_name' => ['required', 'string', 'min:4', 'unique:channels,name']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        $user->channel()->create([
+            'name' => $request->channel_name,
+            'uid' => uniqid(true),
         ]);
 
         event(new Registered($user));

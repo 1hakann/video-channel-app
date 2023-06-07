@@ -16,6 +16,13 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Channel Name -->
+        <div class="mt-4">
+            <x-input-label for="channel_name" :value="__('Channel Name')" />
+            <x-text-input id="channel_name" class="block mt-1 w-full" type="text" name="channel_name" :value="old('channel_name')" required />
+            <x-input-error :messages="$errors->get('channel_name')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
