@@ -1,10 +1,13 @@
 <div>
+    @if ($channel->image)
+        <img src="{{ asset('images/' . $channel->image) }}" />
+    @endif
     @if (session()->has('message'))
     <div class="mb-4 rounded-lg bg-[#D6FAE4] px-6 py-5 text-base text-[#147B6F]" role="alert">
         {{ session('message') }}
     </div>
     @endif
-    <form wire:submit.prevent="update">
+    <form wire:submit.prevent="update" enctype="multipart/form-data">
         <div class="mt-8 space-y-6">
             <div>
                 <label for="name" class="text-sm text-gray-700 block mb-1 font-medium">Adı</label>
@@ -29,6 +32,21 @@
                 <textarea id="description" wire:model="channel.description" class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Enter your channel name" cols="30" rows="4"></textarea>
             </div>
             @error('channel.description')
+            <div class="mb-4 rounded-lg bg-[#FAE5E9] px-6 py-5 text-base text-[#C12C3A]" role="alert">
+                {{ $message }}
+            </div>
+            @enderror
+            <div>
+                <label for="image" class="text-sm text-gray-700 block mb-1 font-medium">Logo</label>
+                <input id="image" type="file" wire:model="image" class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" />
+            </div>
+            <div>
+                @if($image)
+                    Logo Öngörünümü
+                    <img class="w-full h-auto max-w-xl rounded-lg" src="{{ $image->temporaryUrl() }}" />
+                @endif
+            </div>
+            @error('image')
             <div class="mb-4 rounded-lg bg-[#FAE5E9] px-6 py-5 text-base text-[#C12C3A]" role="alert">
                 {{ $message }}
             </div>
