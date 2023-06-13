@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Channel extends Model
+class Video extends Model
 {
     use HasFactory;
     use HasSlug;
@@ -21,7 +21,7 @@ class Channel extends Model
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('uid');
     }
 
     /**
@@ -31,16 +31,11 @@ class Channel extends Model
      */
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'uid';
     }
 
-    public function user()
+    public function channel()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function videos()
-    {
-        return $this->hasMany(Video::class);
+        return $this->belongsTo(Video::class);
     }
 }
