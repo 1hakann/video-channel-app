@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChannelController;
+use App\Http\Livewire\Video\AllVideo;
+use App\Http\Livewire\Video\CreateVideo;
+use App\Http\Livewire\Video\EditVideo;
+use App\Http\Livewire\Video\ShowVideo;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +29,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function() {
     Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
+    Route::get('/videos/{channel}/create', [CreateVideo::class, 'render'])->name('video.create');
+    Route::get('/videos/{channel}/{video}/edit', [EditVideo::class])->name('video.edit');
+    Route::get('/videos/{channel}', [AllVideo::class])->name('video.all');
 });
 
 Route::middleware('auth')->group(function () {
