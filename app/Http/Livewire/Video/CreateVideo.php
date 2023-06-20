@@ -3,14 +3,30 @@
 namespace App\Http\Livewire\Video;
 
 use Livewire\Component;
+use App\Models\Channel;
+use App\Models\Video;
 
 class CreateVideo extends Component
 {
-    public $name = "Hakan";
+    public Channel $channel;
+    public Video $video;
+    public $videoFile;
 
-    public function mount($name)
+    public function mount($channel)
     {
-        $this->name = $name;
+        $this->channel = $channel;
+    }
+
+    public function upload()
+    {
+        $this->validate([
+            'videoFile' => 'required|mimes:mp4|max:10240',
+        ]);
+    }
+
+    public function fileCompleted()
+    {
+
     }
 
     public function render()
