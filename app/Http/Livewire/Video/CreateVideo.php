@@ -15,7 +15,7 @@ class CreateVideo extends Component
     public Video $video;
     public $videoFile;
 
-    public function mount($channel)
+    public function mount(Channel $channel)
     {
         $this->channel = $channel;
     }
@@ -29,11 +29,11 @@ class CreateVideo extends Component
 
     public function fileCompleted()
     {
-
+        dd('file completed');
     }
 
     public function render()
     {
-        return view('livewire.video.create-video');
+        return view('livewire.video.create-video')->extends('layouts.app');
     }
 }
