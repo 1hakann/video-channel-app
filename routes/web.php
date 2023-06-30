@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\VideoController;
 use App\Http\Livewire\Video\AllVideo;
 use App\Http\Livewire\Video\CreateVideo;
 use App\Http\Livewire\Video\EditVideo;
