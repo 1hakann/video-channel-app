@@ -7,8 +7,8 @@ use App\Models\Video;
 
 class VideoController extends Controller
 {
-    public function create(Video $video)
+    public function create()
     {
-        return view('video.create', compact('video'));
+        // return view('video.create', compact('video'));
     }
 }

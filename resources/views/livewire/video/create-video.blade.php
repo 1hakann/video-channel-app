@@ -12,10 +12,11 @@
                 x-on:livewire-upload-error="isUploading = false"
                 x-on:livewire-upload-progress="progress = $event.detail.progress">
                 <div class="mt-8 space-y-6">
-                    <div class="bg-gray-200 rounded-full">
+                    <div class="bg-gray-200 rounded-full" x-show="isUploading">
                         <div class="bg-blue-500 rounded-full h-2" role="progressbar" :style="`width: ${progress}%`"></div>
                     </div>
-                    <form x-show="!isUploading">
+                    <form x-show="!isUploading" method="POST">
+                        @csrf
                         <input type="file" wire:model='videoFile'>
                     </form>
                     @error('videoFile')
