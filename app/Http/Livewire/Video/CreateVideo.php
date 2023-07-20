@@ -42,6 +42,7 @@ class CreateVideo extends Component
             'description' => 'none',
             'uid' => uniqid(true),
             'visibility' => 'private',
+            'channel_id' => $this->channel->id,
             'path' => explode('/', $path)[1]
         ]);
 
