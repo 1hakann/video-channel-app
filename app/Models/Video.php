@@ -36,6 +36,6 @@ class Video extends Model
 
     public function channel()
     {
-        return $this->belongsTo(Video::class);
+        return $this->belongsTo(Channel::class);
     }
 }

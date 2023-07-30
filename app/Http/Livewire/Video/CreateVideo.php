@@ -27,7 +27,7 @@ class CreateVideo extends Component
     public function uploadVideo()
     {
         $this->validate([
-            'videoFile' => 'required|mimes:mp4|max:10240',
+            'videoFile' => 'required|mimes:mp4|max:1228800',
         ]);
     }
 
@@ -35,11 +35,15 @@ class CreateVideo extends Component
     {
         $this->validate();
 
+        $path = $this->videoFile->store('videos-temp');
+
         $this->video = $this->channel->videos()->create([
             'title' => 'untitled',
             'description' => 'none',
             'uid' => uniqid(true),
             'visibility' => 'private',
+            'channel_id' => $this->channel->id,
+            'path' => explode('/', $path)[1]
         ]);
 
         return redirect()->route('video.edit', [
