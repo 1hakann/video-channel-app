@@ -24,32 +24,30 @@ class CreateVideo extends Component
         $this->channel = $channel;
     }
 
-    public function uploadVideo()
-    {
-        $this->validate([
-            'videoFile' => 'required|mimes:mp4|max:1228800',
-        ]);
-    }
-
     public function fileCompleted()
     {
         $this->validate();
 
         $path = $this->videoFile->store('videos-temp');
 
-        $this->video = $this->channel->videos()->create([
-            'title' => 'untitled',
-            'description' => 'none',
-            'uid' => uniqid(true),
-            'visibility' => 'private',
-            'channel_id' => $this->channel->id,
-            'path' => explode('/', $path)[1]
-        ]);
+        try {
+            $this->video = $this->channel->videos()->create([
+                'title' => 'untitled',
+                'description' => 'none',
+                'uid' => uniqid(true),
+                'visibility' => 'private',
+                'channel_id' => $this->channel->id,
+                'path' => explode('/', $path)[1]
+            ]);
 
-        return redirect()->route('video.edit', [
-            'channel' => $this->channel,
-            'video' => $this->video,
-        ]);
+            return redirect()->route('video.edit', [
+                'channel' => $this->channel,
+                'video' => $this->video,
+            ])->with('success', 'Video is uploaded successfully');
+
+        } catch(\Exception $e) {
+            dd($e);
+        }
     }
 
     public function render()
