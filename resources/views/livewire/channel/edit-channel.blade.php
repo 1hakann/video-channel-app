@@ -53,8 +53,14 @@
             @enderror
             <div class="space-x-4 mt-8">
                 <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">Kaydet</button>
-                <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Geri Dön</button>
-              </div>
+                <a href="{{ route('dashboard') }}" class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Geri Dön</a>
+            </div>
+
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                {{ session('message')}}
+                </div>
+            @endif
         </div>
     </form>
 </div>

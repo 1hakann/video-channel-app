@@ -1,13 +1,22 @@
 <div class="container">
     <div class="justify-center mt-4">
-        <div class="card max-w-2xl" x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false , $wire.fileCompleted()" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
+        <div class="card max-w-2xl" x-data="{ isUploading: false, progress: 0 }"
+            x-on:livewire-upload-start="isUploading = true"
+            x-on:livewire-upload-finish="isUploading = false , $wire.fileCompleted()"
+            x-on:livewire-upload-error="isUploading = false"
+            x-on:livewire-upload-progress="progress = $event.detail.progress"
+            >
             <div class="mt-8 space-y-6">
                 <div class="bg-gray-200 rounded-full" x-show="isUploading">
                     <div class="bg-blue-500 rounded-full h-2" role="progressbar" :style="`width: ${progress}%`"></div>
                 </div>
-                <form x-show="!isUploading" method="POST">
+                <form wire:submit="fileCompleted" x-show="!isUploading" method="POST" class="max-w-md mx-auto">
                     @csrf
-                    <input type="file" accept="video/*" wire:model='videoFile'>
+                    <div class="mb-5">
+                        <label for="videoFile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your video</label>
+                        <input type="file" id="videoFile" accept="video/*" wire:model='videoFile' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                    </div>
+                    <button type="submit" class="mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </form>
                 @error('videoFile')
                     <div class="mb-4 rounded-lg bg-[#D6FAE4] px-6 py-5 text-base text-[#147B6F]">
@@ -16,18 +25,5 @@
                 @enderror
             </div>
         </div>
-        {{-- <form enctype="multipart/form-data">
-                <div class="mt-8 space-y-6">
-
-                    <div>
-                        <label for="videoFile" class="text-sm text-gray-700 block mb-1 font-medium">Adı</label>
-                        <input type="file" id="videoFile" wire:model="videoFile" wire:change="uploadVideo" class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Enter your channel name" />
-                    </div>
-                    <div class="space-x-4 mt-8">
-                        <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">Kaydet</button>
-                        <button class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Geri Dön</button>
-                    </div>
-                </div>
-            </form> --}}
     </div>
 </div>

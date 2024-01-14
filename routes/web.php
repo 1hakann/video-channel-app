@@ -29,9 +29,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function() {
-    Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
     Route::get('/videos/{channel}/create', [VideoController::class, 'create'])->name('video.create');
     Route::get('/videos/{channel}/{video}/edit', [VideoController::class, 'edit'])->name('video.edit');
+    Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
     Route::get('/videos/{channel}', [AllVideo::class])->name('video.all');
 });
 
